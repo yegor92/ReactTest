@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux'
+import photosReducer from './photos'
 
 export const createRootReducer = () => (
-  combineReducers({})
+  combineReducers({
+    photos: photosReducer
+  })
 )
 
 export default createRootReducer

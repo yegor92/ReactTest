@@ -1,14 +1,16 @@
 import React from 'react';
+import PhotosScreen from './containers/photos'
 import './styles/App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Empty yet
-        </p>
+        <h1>Photos List</h1>
       </header>
+      <div className="App-content">
+        <PhotosScreen/>
+      </div>
     </div>
   );
 }
