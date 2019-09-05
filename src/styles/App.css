@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #3f51b5;
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -11,6 +11,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.topbar {
+  box-shadow: none !important;
 }
 
 .App-link {
