@@ -1,23 +1,28 @@
 import { connect } from 'react-redux'
-import { fetchPhotos, getFavorites, setFavorites } from '../../reducers/photos'
+import { fetchPhotos } from '../../reducers/photos'
+import { fetchFavorites, likeIt, unlikeIt } from '../../reducers/favorites'
 import PhotoList from '../../components/photos/PhotoList'
 
 const mapStateToProps = (state) => ({
   fresh: state.photos.fresh,
   loading: state.photos.loading,
-  photos: state.photos.photos,
-  favorites: state.photos.favorites,
+  photos: state.photos.photos.slice(state.photos.offset, state.photos.offset + state.photos.limit),
+  favorites: state.favorites.favorites,
+  error: state.photos.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPhotos: () => {
     dispatch(fetchPhotos())
   },
-  getFavorites: () => {
-    dispatch(getFavorites())
+  fetchFavorites: () => {
+    dispatch(fetchFavorites())
   },
-  setFavorites: (id) => {
-    dispatch(setFavorites(id))
+  like: (id) => {
+    dispatch(likeIt(id))
+  },
+  unlike: (id) => {
+    dispatch(unlikeIt(id))
   }
 })
 

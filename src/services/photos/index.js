@@ -9,4 +9,3 @@ export const get = async () => {
   })
   return response.data
 }
-

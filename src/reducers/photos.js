@@ -1,33 +1,19 @@
 export const PhotosActionTypeKeys = {
-  // fetch all images
   FETCH_PHOTOS_COMPLETE: 'PHOTOS/FETCH_COMPLETE',
   FETCH_PHOTOS_FAILURE: 'PHOTOS/FETCH_FAILURE',
   FETCH_PHOTOS_REQUEST: 'PHOTOS/FETCH_REQUEST',
   FETCH_PHOTOS_SUCCESS: 'PHOTOS/FETCH_SUCCESS',
-
-  // Set / Get image to favorite list
-  SET_FAVORITES_COMPLETE: 'PHOTO/FAVORITES/SET_COMPLETE',
-  SET_FAVORITES_FAILURE: 'PHOTO/FAVORITES/SET_FAILURE',
-  SET_FAVORITES_REQUEST: 'PHOTO/FAVORITES/SET_REQUEST',
-  SET_FAVORITES_SUCCESS: 'PHOTO/FAVORITES/SET_SUCCESS',
-  GET_FAVORITES_COMPLETE: 'PHOTO/FAVORITES/GET_COMPLETE',
-  GET_FAVORITES_FAILURE: 'PHOTO/FAVORITES/GET_FAILURE',
-  GET_FAVORITES_REQUEST: 'PHOTO/FAVORITES/GET_REQUEST',
-  GET_FAVORITES_SUCCESS: 'PHOTO/FAVORITES/GET_SUCCESS',
-
-  // Pagination
-
+  CHANGE_LIMIT: 'PHOTOS/CHANGE_LIMIT',
+  CHANGE_OFFSET: 'PHOTOS/CHANGE_OFFSET',
 }
 
-// Functions to fetch all photos
 export const fetchPhotos = () => ({
   type: PhotosActionTypeKeys.FETCH_PHOTOS_REQUEST
 })
 
-export const fetchPhotosSuccess = (photos = [], favorites = []) => ({
+export const fetchPhotosSuccess = (photos = []) => ({
   payload: {
-    photos,
-    favorites,
+    photos
   },
   type: PhotosActionTypeKeys.FETCH_PHOTOS_SUCCESS
 })
@@ -37,48 +23,27 @@ export const fetchPhotosFailure = (error) => ({
   type: PhotosActionTypeKeys.FETCH_PHOTOS_FAILURE
 })
 
-// Functions to get favorites
-export const getFavorites = () => ({
-  type: PhotosActionTypeKeys.GET_FAVORITES_REQUEST
-})
-
-export const getFavoritesSuccess = (favorites) => ({
+export const changeOffset = (offset) => ({
   payload: {
-    favorites
+    offset
   },
-  type: PhotosActionTypeKeys.GET_FAVORITES_SUCCESS
+  type: PhotosActionTypeKeys.CHANGE_OFFSET
 })
 
-export const getFavoritesFailure = (error) => ({
-  error: { error },
-  type: PhotosActionTypeKeys.GET_FAVORITES_FAILURE
-})
-
-// Functions to set photo into favorite list. 
-export const setFavorites = (photoId) => ({
+export const changeLimit = (limit) => ({
   payload: {
-    id: photoId
+    limit
   },
-  type: PhotosActionTypeKeys.SET_FAVORITES_REQUEST
-})
-
-export const setFavoritesSuccess = (favorites) => ({
-  payload: {
-    favorites
-  },
-  type: PhotosActionTypeKeys.SET_FAVORITES_SUCCESS
-})
-
-export const setFavoritesFailure = (error) => ({
-  error: { error },
-  type: PhotosActionTypeKeys.SET_FAVORITES_FAILURE
+  type: PhotosActionTypeKeys.CHANGE_LIMIT
 })
 
 const initialState = {
   fresh: false,
   loading: true,
   photos: [],
-  favorites: [],
+  offset: 0,
+  limit: 25,
+  error: null
 }
 
 export const photosReducer = (state = initialState, action) => {
@@ -94,46 +59,26 @@ export const photosReducer = (state = initialState, action) => {
         ...state,
         fresh: true,
         loading: false,
-        photos: action.payload.photos,
-        favorites: action.payload.favorites,
+        photos: action.payload.photos
       }
 
     case PhotosActionTypeKeys.FETCH_PHOTOS_FAILURE:
       return {
         ...state,
-        loading: false
-      }
-    
-    case PhotosActionTypeKeys.GET_FAVORITES_REQUEST:
-      return {
-        ...state
+        loading: false,
+        error: action.error.error
       }
 
-    case PhotosActionTypeKeys.GET_FAVORITES_SUCCESS:
+    case PhotosActionTypeKeys.CHANGE_LIMIT:
       return {
         ...state,
-        favorites: action.payload.favorites,
+        limit: action.payload.limit
       }
 
-    case PhotosActionTypeKeys.GET_FAVORITES_FAILURE:
+    case PhotosActionTypeKeys.CHANGE_OFFSET:
       return {
         ...state,
-      }
-
-    case PhotosActionTypeKeys.SET_FAVORITES_REQUEST:
-      return {
-        ...state,
-      }
-
-    case PhotosActionTypeKeys.SET_FAVORITES_SUCCESS:
-      return {
-        ...state,
-        favorites: action.payload.favorites,
-      }
-
-    case PhotosActionTypeKeys.SET_FAVORITES_FAILURE:
-      return {
-        ...state,
+        offset: action.payload.offset
       }
 
     default:

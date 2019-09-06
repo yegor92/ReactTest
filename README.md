@@ -69,8 +69,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ### Running by Docker
 
-## Docker Build
-  docker build . -t [name]
+#### Docker Build
 
-## Docker running
-  docker run -d -p 8080:80 [name]
+	docker build . -t [name]
+
+#### Docker running
+
+	docker run -d -p 8080:80 [name]

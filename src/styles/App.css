@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: #3f51b5;
+  background-color: #282c34;
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -13,8 +13,8 @@
   color: white;
 }
 
-.topbar {
-  box-shadow: none !important;
+.App-content {
+  min-height: calc(100vh - 128px);
 }
 
 .App-link {

@@ -1,7 +1,9 @@
 import { all, fork } from 'redux-saga/effects'
+import * as favoritesSagas from './favorites'
 import * as photosSagas from './photos'
 
 const allSagas = {
+  ...favoritesSagas,
   ...photosSagas
 }
 
