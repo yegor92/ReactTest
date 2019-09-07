@@ -13,14 +13,22 @@
     "react-redux": "^7.1.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
-    "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "verbose": true,
+    "automock": false,
+    "setupFiles": [
+      "./setupJest.js"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,6 +46,13 @@
     ]
   },
   "devDependencies": {
-    "redux-devtools": "^3.5.0"
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "jest-fetch-mock": "^2.1.2",
+    "redux-devtools": "^3.5.0",
+    "redux-logger": "^3.0.6"
   }
 }

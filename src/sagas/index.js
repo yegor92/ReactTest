@@ -10,7 +10,7 @@ const allSagas = {
 export default function* root() {
   const sagas = []
 
-  for (const name of Object.keys(allSagas)) {
+  for (var name of Object.keys(allSagas)) {
     if (name.startsWith('watch')) {
       sagas.push(
         fork(allSagas[name])

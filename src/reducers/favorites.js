@@ -46,6 +46,9 @@ export const favoritesReducer = (state = initialState, action) => {
       }
 
     case FavoritesActionTypeKeys.LIKE:
+      if (state.favorites.includes(`${action.payload.id}`)) {
+        return state
+      }
       favorites = state.favorites.concat(`${action.payload.id}`)
       FavoritesService.set(favorites)
       return {
@@ -54,6 +57,9 @@ export const favoritesReducer = (state = initialState, action) => {
       }
 
     case FavoritesActionTypeKeys.UNLIKE:
+      if (!state.favorites.includes(`${action.payload.id}`)) {
+        return state
+      }
       const index = state.favorites.indexOf(`${action.payload.id}`)
       favorites = state.favorites.slice()
       favorites.splice(index, 1)

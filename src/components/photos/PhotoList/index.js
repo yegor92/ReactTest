@@ -6,17 +6,9 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PhotoItem from '../PhotoItem'
 
+import './styles.css'
+
 const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    backgroundColor: 'white',
-    paddingLeft: 40,
-    paddingRight: 40,
-    minHeight: 'calc(100vh - 128px)'
-  },
   gridList: {
     width: '100%',
     height: '100%',
@@ -41,14 +33,14 @@ class PhotoList extends Component {
     const { fresh, loading, photos = [], favorites = [], error, classes } = this.props
     const errorText = error ? JSON.stringify(error) : ''
     return (
-      <div className={classes.root}>
+      <div className={'photo-list-container'}>
         <h2>The number of Favorites: { favorites.length }</h2>
         {loading ? (
           <div className={classes.spinner}>
             <CircularProgress/>
           </div>
         ) : fresh ? (
-          <GridList spacing={1} className={classes.gridList}>
+          <GridList className={classes.gridList}>
             {Array.isArray(photos) && photos.map(photo => (
               <PhotoItem
                 key={photo.id}

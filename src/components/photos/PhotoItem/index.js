@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
 import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 import Tooltip from '@material-ui/core/Tooltip'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
@@ -28,11 +29,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  paper: {
+  closeIcon: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
     backgroundColor: 'transparent',
-    boxShadow: theme.shadows[5],
-    padding: 0,
-  },
+    borderRadius: '50%',
+    color: 'white',
+    cursor: 'pointer',
+  }
 }))
 
 const PhotoItem = (props) => {
@@ -49,7 +54,7 @@ const PhotoItem = (props) => {
 
   return (
     <React.Fragment>
-      <GridListTile key={props.id} className={classes.container}>
+      <GridListTile key={props.id} className={'tileContainer'}>
         <img src={props.thumbnailUrl} alt={props.title} onClick={handleOpen} className={'photo-body'} />
         <GridListTileBar
           title={
@@ -60,7 +65,7 @@ const PhotoItem = (props) => {
           titlePosition="top"
           actionIcon={
             <IconButton
-              aria-label={`star ${props.title}`}
+              aria-label={`Favorite ${props.title}`}
               className={classes.icon}
               onClick={props.onLike}
             >
@@ -84,10 +89,17 @@ const PhotoItem = (props) => {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
+          <div className={'paper'}>
             <img src={props.url} alt={props.title} />
+            <IconButton
+              className={classes.closeIcon}
+              onClick={handleClose}
+            >
+              <CloseIcon size="small" color="inherit" />
+            </IconButton>
           </div>
         </Fade>
+
       </Modal>
     </React.Fragment>
   )
